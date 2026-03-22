@@ -1,0 +1,8 @@
+builders:
+  navigation_builder:
+    import: "package:navigation_api/src/generator/navigation_generator.dart"
+    builder_factories: ["navigationBuilder"]
+    build_extensions: {".dart": [".navigation.g.part"]}
+    auto_apply: root_package
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

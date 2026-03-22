@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_api/navigation_api.dart';
 import 'app_router.dart';
+import 'route_mapper.dart';
 
 class NavigationImpl implements INavigation {
   final AppRouter _appRouter;
@@ -10,9 +11,8 @@ class NavigationImpl implements INavigation {
 
   /// Возвращает конфигурацию роутера для MaterialApp.router
   /// Включает в себя логгер переходов.
-  RouterConfig<Object> get config => _appRouter.config(
-        navigatorObservers: () => [_AppNavigationObserver()],
-      );
+  RouterConfig<Object> get config =>
+      _appRouter.config(navigatorObservers: () => [_AppNavigationObserver()]);
 
   @override
   void goBack<T extends Object?>([T? result]) {
@@ -31,20 +31,17 @@ class NavigationImpl implements INavigation {
     _appRouter.dispose();
   }
 
+  /// Может быть использован для показа снэкбара.
+  /// Как плюс, снэкбар не скроется при покидании страницы
   @override
-  BuildContext? get context => throw UnimplementedError();
+  BuildContext? get context => _appRouter.navigatorKey.currentContext;
 
   @override
   Future<T?> navigateTo<T extends Object?>(
-    RouteSpec destination, {
+    RouteSpec<T> destination, {
     bool replace = false,
   }) {
-    final PageRouteInfo route = switch (destination) {
-      RegisterRouteSpec() => const RegisterRoute(),
-      ProfileMainRouteSpec(:final userId) => ProfileMainRoute(userId: userId),
-      ProfileSettingsRouteSpec() => const ProfileSettingsRoute(),
-      LoginRouteSpec() => const LoginRoute(),
-    };
+    final PageRouteInfo route = RouteMapper.map(destination);
 
     if (replace) {
       return _appRouter.replace<T>(route);

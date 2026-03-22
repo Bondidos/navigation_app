@@ -29,10 +29,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ) async {
     emit(state.copyWith(isLoading: true));
 
-    // Имитация логаута
     await Future.delayed(const Duration(seconds: 1));
 
-    // Переход в auth фичу!
     await _navigation.navigateTo(
       const LoginRouteSpec(), // Из feature_auth!
     );

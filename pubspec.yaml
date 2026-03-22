@@ -9,5 +9,4 @@ workspace:
   - packages/navigation_impl
   - packages/feature_auth
   - packages/feature_personal
-  - packages/navigation_generator
   - app

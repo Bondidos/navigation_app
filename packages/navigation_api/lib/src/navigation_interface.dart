@@ -3,8 +3,9 @@ import '../navigation_api.dart';
 
 abstract interface class INavigation {
   /// Навигация на основе спецификации маршрута
+  /// T - тип возвращаемого значения, указанный в RouteSpec
   Future<T?> navigateTo<T extends Object?>(
-        RouteSpec destination, {
+        RouteSpec<T> destination, {
         bool replace = false,
       });
 

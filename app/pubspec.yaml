@@ -36,6 +36,7 @@ dependencies:
 
   navigation_api: ^0.0.1
   navigation_impl: ^0.0.1
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:

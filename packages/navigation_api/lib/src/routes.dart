@@ -1,20 +1,15 @@
-sealed class RouteSpec {
+import 'annotations/generate_navigation.dart';
+
+part 'routes.g.dart';
+
+sealed class RouteSpec<T extends Object?> {
   const RouteSpec();
 }
-
-class RegisterRouteSpec extends RouteSpec {
-  const RegisterRouteSpec();
-}
-
-class ProfileMainRouteSpec extends RouteSpec {
-  final String userId;
-  const ProfileMainRouteSpec({required this.userId});
-}
-
-class ProfileSettingsRouteSpec extends RouteSpec {
-  const ProfileSettingsRouteSpec();
-}
-
-class LoginRouteSpec extends RouteSpec {
-  const LoginRouteSpec();
+//todo will fail codegen if naming is different with autoroute
+@GenerateNavigation()
+abstract class AppRoutes {
+  void login();
+  void register();
+  void profileMain({required String userId});
+  bool? profileSettings();
 }

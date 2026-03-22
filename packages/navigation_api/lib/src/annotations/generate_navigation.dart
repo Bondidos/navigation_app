@@ -1,0 +1,3 @@
+class GenerateNavigation {
+  const GenerateNavigation();
+}
