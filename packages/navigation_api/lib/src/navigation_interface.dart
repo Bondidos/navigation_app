@@ -1,23 +1,27 @@
-import 'package:flutter/widgets.dart';
 import '../navigation_api.dart';
 
+/// Интерфейс системы навигации, который используется в BLoC/ViewModel.
+///
+/// Позволяет фичам переходить на другие экраны, не зная о деталях реализации
+/// и конкретных библиотеках навигации.
 abstract interface class INavigation {
-  /// Навигация на основе спецификации маршрута
-  /// T - тип возвращаемого значения, указанный в RouteSpec
-  Future<T?> navigateTo<T extends Object?>(
-        RouteSpec<T> destination, {
-        bool replace = false,
-      });
+  /// Основной метод перехода на новый экран.
+  ///
+  /// Принимает объект [RouteSpec], сгенерированный на основе AppRoutes.
+  /// Возвращает [Future], который завершается результатом перехода (если он есть).
+  Future<T?> navigateTo<T extends Object?>(RouteSpec<T> destination);
 
-  /// Возврат с результатом
-  void goBack<T extends Object?>([T? result]);
+  /// Возврат на предыдущий экран.
+  ///
+  /// Может возвращать [result] вызвавшему экрану.
+  Future<void> pop<T extends Object?>([T? result]);
 
-  /// Проверка возможности возврата
-  bool get canGoBack;
+  /// Заменяет текущий стек навигации новым экраном.
+  Future<T?> replaceWith<T extends Object?>(RouteSpec<T> destination);
 
   /// Очистка стека до корня
   void popToRoot();
 
-  /// Контекст для показа диалогов и т.д.
-  BuildContext? get context;
+  /// Очищает весь стек и делает указанный экран корневым.
+  Future<T?> clearStackAndNavigateTo<T extends Object?>(RouteSpec<T> destination);
 }

@@ -35,8 +35,6 @@ class NavigationGenerator extends GeneratorForAnnotation<GenerateNavigation> {
   void _generateRouteSpec(StringBuffer buffer, MethodElement method) {
     final specName = '${_capitalize(method.name)}RouteSpec';
     
-    // Получаем тип возвращаемого значения. 
-    // Если метод возвращает void, используем void.
     String returnType = method.returnType.getDisplayString(withNullability: true);
     if (method.returnType is VoidType) {
       returnType = 'void';

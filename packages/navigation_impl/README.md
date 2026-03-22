@@ -1,39 +1,21 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Navigation Implementation
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+Универсальная реализация системы навигации на базе **AutoRoute**.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Как подключить в новый проект
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+1. Создайте свой `AppRouter` (наследник`RootStackRouter`).
+2. Для связи Spec-объектов с экранами используйте `@GenerateMapper`:
 ```dart
-const like = 'sample';
+@GenerateMapper(AppRoutes)
+class _RouteMapperTrigger {
+  ///код сгенурируется в .g.dart
+}
 ```
+3. В реализации `INavigation` (NavigationImpl) прокиньте свой `AppRouter` и вызовите `RouteMapper.map(destination)`.
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Особенности
+Пакет содержит `MapperGenerator`, который автоматически находит ваши страницы в проекте.
+Страница должна:
+1. Быть помечена `@RoutePage()`.
+2. Иметь в конструкторе параметр `spec` соответствующего типа.
