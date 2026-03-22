@@ -1,5 +1,5 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+library;
+
+export 'src/navigation_interface.dart';
+export 'src/annotations/generate_route.dart';
+export 'src/routes.dart';

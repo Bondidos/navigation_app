@@ -1,0 +1,15 @@
+#builders:
+#  navigation_generator:
+#    import: "package:navigation_generator/navigation_generator.dart"
+#    builder_factories: ["navigationGenerator"]
+#    build_extensions: {".dart": [".navigation.g.part"]}
+#    auto_apply: dependents
+#    build_to: cache
+#    applies_builders: ["source_gen|combining_builder"]
+#
+#  mapper_generator:
+#    import: "package:navigation_generator/navigation_generator.dart"
+#    builder_factories: ["mapperGenerator"]
+#    build_extensions: {".dart": [".mapper.g.dart"]}
+#    auto_apply: none
+#    build_to: source
