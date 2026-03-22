@@ -1,0 +1,11 @@
+builders:
+  mapper_builder:
+    import: "package:navigation_impl/src/generator/mapper_generator.dart"
+    builder_factories: ["mapperBuilder"]
+    build_extensions: {".dart": [".mapper.g.part"]}
+    auto_apply: root_package
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
+    defaults:
+      generate_for:
+        - lib/src/route_mapper.dart
