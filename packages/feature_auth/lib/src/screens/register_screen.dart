@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_api/navigation_api.dart';
-import '../bloc/auth_bloc.dart';
+
+import '../../feature_auth.dart';
 
 abstract class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  final RegisterRouteSpec spec;
+
+  const RegisterScreen({
+    required this.spec,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

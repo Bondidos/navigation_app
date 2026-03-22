@@ -1,7 +1,10 @@
-import 'package:auto_route/annotations.dart';
-import 'package:feature_personal/feature_personal.dart' as profile;
+import 'package:auto_route/auto_route.dart';
+import 'package:feature_personal/feature_personal.dart' as personal;
 
 @RoutePage()
-class ProfileSettingsScreen extends profile.ProfileSettingsScreen {
-  const ProfileSettingsScreen({super.key});
+class ProfileSettingsPage extends personal.ProfileSettingsScreen {
+  const ProfileSettingsPage({
+    required super.spec,
+    super.key,
+  });
 }

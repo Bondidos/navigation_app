@@ -4,7 +4,12 @@ import 'package:navigation_api/navigation_api.dart';
 import '../bloc/auth_bloc.dart';
 
 abstract class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final LoginRouteSpec spec;
+
+  const LoginScreen({
+    this.spec = const LoginRouteSpec(),
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ abstract class LoginScreen extends StatelessWidget {
     );
   }
 }
+
 
 class _LoginView extends StatelessWidget {
   const _LoginView();

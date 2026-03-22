@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
+import 'package:navigation_api/navigation_api.dart';
 import 'pages/login_screen.dart';
 import 'pages/register_screen.dart';
 import 'pages/profile_main_screen.dart';
 import 'pages/profile_settings_screen.dart';
-import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 

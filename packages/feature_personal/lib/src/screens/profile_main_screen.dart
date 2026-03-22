@@ -4,7 +4,12 @@ import 'package:navigation_api/navigation_api.dart';
 import '../bloc/profile_bloc.dart';
 
 abstract class ProfileMainScreen extends StatelessWidget {
-  const ProfileMainScreen({super.key});
+  final ProfileMainRouteSpec spec;
+
+  const ProfileMainScreen({
+    required this.spec,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

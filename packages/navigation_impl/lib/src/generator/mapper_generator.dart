@@ -2,7 +2,6 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
-// Импортируем только аннотацию, чтобы не тянуть за собой весь API с его part-файлами
 import 'package:navigation_api/src/annotations/generate_mapper.dart';
 
 Builder mapperBuilder(BuilderOptions options) =>
@@ -21,36 +20,28 @@ class MapperGenerator extends GeneratorForAnnotation<GenerateMapper> {
     if (registryType is! InterfaceType) {
       throw InvalidGenerationSourceError('Registry must be a class.');
     }
-    
-    final registryElement = registryType.element as ClassElement;
 
+    final registryElement = registryType.element as ClassElement;
     final buffer = StringBuffer();
+
     buffer.writeln('// Generated RouteMapper for ${registryElement.name}');
     buffer.writeln('abstract class RouteMapper {');
     buffer.writeln('  static PageRouteInfo map(RouteSpec destination) {');
     buffer.writeln('    return switch (destination) {');
 
+    // Для каждого метода в AppRoutes ищем соответствующую страницу
     for (final method in registryElement.methods) {
-      final methodName = method.name;
-      final specName = '${_capitalize(methodName)}RouteSpec';
-      final autoRouteName = '${_capitalize(methodName)}Route';
+      final specName = '${_capitalize(method.name)}RouteSpec';
+      final autoRouteName = '${_capitalize(method.name)}Route';
 
-      buffer.write('      $specName(');
-      if (method.parameters.isNotEmpty) {
-        final params = method.parameters.map((p) => ':final ${p.name}').join(', ');
-        buffer.write(params);
-      }
-      buffer.write(') => ');
-
-      buffer.write('$autoRouteName(');
-      if (method.parameters.isNotEmpty) {
-        final args = method.parameters.map((p) => '${p.name}: ${p.name}').join(', ');
-        buffer.write(args);
-      }
-      buffer.writeln('),');
+      // Генератор теперь ВСЕГДА передает объект spec в AutoRoute.
+      // Это требует, чтобы страницы в impl принимали 'spec' в конструкторе.
+      buffer.writeln('      $specName spec => $autoRouteName(spec: spec),');
     }
 
-    buffer.writeln("      _ => throw UnimplementedError('Unknown route: \$destination'),");
+    buffer.writeln(
+      "      _ => throw UnimplementedError('Unknown route: \$destination'),",
+    );
     buffer.writeln('    };');
     buffer.writeln('  }');
     buffer.writeln('}');

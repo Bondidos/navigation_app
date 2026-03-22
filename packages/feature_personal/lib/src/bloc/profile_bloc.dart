@@ -19,7 +19,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       Emitter<ProfileState> emit,
       ) {
     _navigation.navigateTo(
-      const ProfileSettingsRouteSpec(), // Внутри своей фичи
+      const ProfileSettingsRouteSpec(),
     );
   }
 
@@ -32,7 +32,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     await Future.delayed(const Duration(seconds: 1));
 
     await _navigation.navigateTo(
-      const LoginRouteSpec(), // Из feature_auth!
+      const LoginRouteSpec(),
     );
 
     emit(state.copyWith(isLoading: false, isLoggedIn: false));
